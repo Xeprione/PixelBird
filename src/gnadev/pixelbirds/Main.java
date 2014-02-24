@@ -83,7 +83,7 @@ public class Main extends Canvas implements Runnable {
 		input = new InputHandler(this);
 		m = new Menu(input);
 		level_menu = new Level("/levels/level_1.png");
-		level = new Level(Level.getRandomLevel(Level.levelPack));
+		level = new Level(Level.getRandomLevel(Level.defaultPack));
 		player = new Player(level, 15, 15, input);
 		level.addEntity(player);
 	}
@@ -196,6 +196,12 @@ public class Main extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
+		System.out.println("Found "+Level.getLevelPacks().length+" level packs");
+		
+		for(String s : Level.getLevelPackNames()){
+			System.out.println("Found levelpack '"+s+"'");
+		}
+		
 		new Main().start();
 	}
 	

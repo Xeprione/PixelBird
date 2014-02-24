@@ -1,6 +1,5 @@
 package gnadev.pixelbirds.level;
 
-import gnadev.pixelbirds.Colors;
 import gnadev.pixelbirds.entities.Entity;
 import gnadev.pixelbirds.gfx.Screen;
 import gnadev.pixelbirds.level.tiles.Tile;
@@ -14,7 +13,8 @@ import javax.imageio.ImageIO;
 
 public class Level {
 
-	public static String[] levelPack = new String[7];
+	public static String[] defaultPack = new String[1];
+	public static String[] currentLevelPack;
 
 	public byte[] tiles;
 
@@ -116,10 +116,12 @@ public class Level {
 	}
 
 	public Tile getTile(int x, int y) {
-		if (0 > x || 0 > y || height <= y || y == height-1)
+		if (0 > x || 0 > y || height <= y || y == height - 1)
 			return Tile.WALL;
 		if (width <= x)
 			return Tile.SKY;
+		if (x == width - 1)
+			return Tile.FINISH;
 		return Tile.tiles[tiles[x + y * width]];
 	}
 
@@ -155,12 +157,48 @@ public class Level {
 	}
 
 	static {
-		levelPack[0] = "/levels/level_1.png";
-		levelPack[1] = "/levels/level_2.png";
-		levelPack[2] = "/levels/level_3.png";
-		levelPack[3] = "/levels/level_4.png";
-		levelPack[4] = "/levels/level_5.png";
-		levelPack[5] = "/levels/level_6.png";
-		levelPack[6] = "/levels/level_7.png";
+		defaultPack[0] = "/levels/level_5.png";
+		/*
+		 * defaultPack[1] = "/levels/level_2.png"; defaultPack[2] =
+		 * "/levels/level_3.png"; defaultPack[3] = "/levels/level_4.png";
+		 * defaultPack[4] = "/levels/level_5.png"; defaultPack[5] =
+		 * "/levels/level_6.png"; defaultPack[6] = "/levels/level_7.png";
+		 * defaultPack[7] = "/levels/level_8.png"; defaultPack[8] =
+		 * "/levels/level_9.png";
+		 */
 	}
+
+	public static File[] getLevelPacks() {
+		File packsRoot = new File(System.getProperty("user.home")
+				+ "/PixelBird/LevelPacks");
+		if (!packsRoot.exists()) {
+			packsRoot.mkdirs();
+		}
+		int levelPackFiles = packsRoot.listFiles().length;
+		int levelPacksCount = 0;
+		for (File f : packsRoot.listFiles()) {
+			boolean isLevelPack = new File(f.getPath() + "/data.txt").exists();
+			if (f.isDirectory() && isLevelPack)
+				levelPacksCount++;
+		}
+		File[] levelPacks = new File[levelPacksCount];
+		for (int i = 0; i < levelPacksCount; i++) {
+			levelPacks[i] = packsRoot.listFiles()[i];
+		}
+		return levelPacks;
+	}
+
+	public static String[] getLevelPackNames() {
+		File[] levelPacks = getLevelPacks();
+		String[] levelPackNames = new String[levelPacks.length];
+
+		// TODO: Read the data file to get the pack name
+
+		for (int i = 0; i < levelPacks.length; i++) {
+			levelPackNames[i] = levelPacks[i].getName();
+		}
+
+		return levelPackNames;
+	}
+
 }

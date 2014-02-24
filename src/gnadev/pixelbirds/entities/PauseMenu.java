@@ -42,7 +42,7 @@ public class PauseMenu extends Dialog {
 			}
 			if (chosen == 2) {
 				Player.isPaused = false;
-				level.getRandomLevel(Level.levelPack);
+				level.getRandomLevel(Level.defaultPack);
 				this.p.reset();
 				p.setLocation(15,15);
 				this.chosen = 0;
@@ -58,27 +58,30 @@ public class PauseMenu extends Dialog {
 	}
 
 	public void render(Screen s) {
-		int color = Colors.get(-1, 000, 050, -1);
-		s.render(s.xOffset + 32, s.yOffset + 5, 4 + 29 * 32, color, 0x00, 1);
-		s.render(s.xOffset + 32, s.yOffset + s.height - 16, 4 + 29 * 32, color,
+		int color = Colors.get(-1, 000, 335, -1);
+		
+		s.render(s.xOffset + 32, s.yOffset + 5, 5+32, color, 0x00, 1);
+		s.render(s.xOffset + 32, s.yOffset + s.height - 16, 5+32, color,
 				0x06, 1);
-		s.render(s.xOffset + s.width - 32, s.yOffset + 5, 4 + 29 * 32, color,
+		s.render(s.xOffset + s.width - 32, s.yOffset + 5, 5+32, color,
 				0x09, 1);
 		s.render(s.xOffset + s.width - 32, s.yOffset + s.height - 16,
-				4 + 29 * 32, color, 0x03, 1);
+				5+32, color, 0x03, 1);
 
 		for (int x = 0; x < 11; x++) {
 			for (int y = 0; y < 11; y++) {
 				s.render(s.xOffset + 40 + x * 8, s.yOffset + 13 + y * 8,
-						7 + 29 * 32, color, 0x00, 1);
-				s.render(s.xOffset + 40 + x * 8, s.yOffset + 5, 6 + 29 * 32,
+						8+ 32, color, 0x00, 1);
+				s.render(s.xOffset + 40 + x * 8, s.yOffset + 5, 7+ 32,
 						color, 0x00, 1);
 				s.render(s.xOffset + 40 + x * 8, s.yOffset + s.height - 16,
-						6 + 29 * 32, color, 0x03, 1);
-				s.render(s.xOffset + 32, s.yOffset + 13 + y * 8, 5 + 29 * 32,
+						7+ 32, color, 0x03, 1);
+				
+				s.render(s.xOffset + 32, s.yOffset + 13 + y * 8, 6+ 32,
 						color, 0x00, 1);
+				
 				s.render(s.xOffset + s.width - 32, s.yOffset + 13 + y * 8,
-						5 + 29 * 32, color, 0x03, 1);
+						6+ 32, color, 0x03, 1); // Right border side
 			}
 		}
 
@@ -87,7 +90,7 @@ public class PauseMenu extends Dialog {
 					Colors.get(-1, -1, -1, 000), 1);
 		}
 
-		s.render(s.xOffset + 35, s.yOffset + 15 + chosen * 20, 8 + 29 * 32,
+		s.render(s.xOffset + 35, s.yOffset + 15 + chosen * 20, 9+32,
 				Colors.get(-1, 555, -1, -1), 0x00, 1);
 	}
 

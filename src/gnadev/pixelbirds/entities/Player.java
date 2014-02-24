@@ -25,7 +25,7 @@ public class Player extends Mob {
 	int going = 0, DOWN = 1, UP = -1, STATIC = 0;
 	private int currentLevel = 1;
 	public int score = 0;
-	long lastTimer;
+	public static long lastTimer;
 
 	public Player(Level level, int x, int y, InputHandler input) {
 		super(level, "Player", x, y, 2);
@@ -72,7 +72,7 @@ public class Player extends Mob {
 			} else {
 				if (getInput().ACTION.isPressed() && dead) {
 					this.level.changeLevel(Level
-							.getRandomLevel(Level.levelPack));
+							.getRandomLevel(Level.defaultPack));
 					this.currentLevel = 1;
 					reset();
 				}
@@ -89,8 +89,10 @@ public class Player extends Mob {
 		}
 
 		if (level.getTile((this.x) >> 3, this.y >> 3).getID() == Tile.FINISH
-				.getID()) {
-			this.level.changeLevel(Level.getRandomLevel(Level.levelPack));
+				.getID()
+				|| level.getTile(this.x >> 3, this.y >> 3+1).getID() == Tile.FINISH
+						.getID()) {
+			this.level.changeLevel(Level.getRandomLevel(Level.defaultPack));
 			this.currentLevel += 1;
 			reset();
 		}
@@ -99,9 +101,9 @@ public class Player extends Mob {
 			this.dead = true;
 		}
 
-		if (System.currentTimeMillis() - lastTimer > 5000) {
-			lastTimer += 5000;
-			if (!isPaused && !Main.isPaused && !won){
+		if (System.currentTimeMillis() - lastTimer > 1000) {
+			lastTimer += 1000;
+			if (!isPaused && !Main.isPaused && !won && !dead) {
 				this.score++;
 			}
 		}
@@ -224,7 +226,7 @@ public class Player extends Mob {
 			this.currentLevel = 1;
 			this.score = 0;
 		}
-		this.level.changeLevel(Level.getRandomLevel(Level.levelPack));
+		this.level.changeLevel(Level.getRandomLevel(Level.defaultPack));
 		this.dead = false;
 		this.won = false;
 		this.timeLeft = (int) (5 * Main.getMaxTicks());
