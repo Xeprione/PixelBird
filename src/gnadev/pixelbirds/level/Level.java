@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 public class Level {
 
-	public static String[] defaultPack = new String[1];
+	public static String[] defaultPack = new String[9];
 	public static String[] currentLevelPack;
 
 	public byte[] tiles;
@@ -157,15 +157,15 @@ public class Level {
 	}
 
 	static {
-		defaultPack[0] = "/levels/level_5.png";
-		/*
-		 * defaultPack[1] = "/levels/level_2.png"; defaultPack[2] =
-		 * "/levels/level_3.png"; defaultPack[3] = "/levels/level_4.png";
-		 * defaultPack[4] = "/levels/level_5.png"; defaultPack[5] =
-		 * "/levels/level_6.png"; defaultPack[6] = "/levels/level_7.png";
-		 * defaultPack[7] = "/levels/level_8.png"; defaultPack[8] =
-		 * "/levels/level_9.png";
-		 */
+		defaultPack[0] = "/levels/level_1.png";
+		defaultPack[1] = "/levels/level_2.png";
+		defaultPack[2] = "/levels/level_3.png";
+		defaultPack[3] = "/levels/level_4.png";
+		defaultPack[4] = "/levels/level_5.png";
+		defaultPack[5] = "/levels/level_6.png";
+		defaultPack[6] = "/levels/level_7.png";
+		defaultPack[7] = "/levels/level_8.png";
+		defaultPack[8] = "/levels/level_9.png";
 	}
 
 	public static File[] getLevelPacks() {

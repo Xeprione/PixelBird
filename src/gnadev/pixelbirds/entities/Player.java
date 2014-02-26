@@ -72,7 +72,7 @@ public class Player extends Mob {
 			} else {
 				if (getInput().ACTION.isPressed() && dead) {
 					this.level.changeLevel(Level
-							.getRandomLevel(Level.defaultPack));
+							.getRandomLevel((String[]) Level.defaultPack));
 					this.currentLevel = 1;
 					reset();
 				}
@@ -92,7 +92,7 @@ public class Player extends Mob {
 				.getID()
 				|| level.getTile(this.x >> 3, this.y >> 3+1).getID() == Tile.FINISH
 						.getID()) {
-			this.level.changeLevel(Level.getRandomLevel(Level.defaultPack));
+			this.level.changeLevel(Level.getRandomLevel((String[]) Level.defaultPack));
 			this.currentLevel += 1;
 			reset();
 		}
@@ -226,7 +226,7 @@ public class Player extends Mob {
 			this.currentLevel = 1;
 			this.score = 0;
 		}
-		this.level.changeLevel(Level.getRandomLevel(Level.defaultPack));
+		this.level.changeLevel(Level.getRandomLevel((String[]) Level.defaultPack));
 		this.dead = false;
 		this.won = false;
 		this.timeLeft = (int) (5 * Main.getMaxTicks());
@@ -251,5 +251,10 @@ public class Player extends Mob {
 
 	public void setLocation(int x, int y) {
 		setLocation(new Point(x, y));
+	}
+	
+	public static boolean isNewHighScore(int score){
+		
+		return false;
 	}
 }

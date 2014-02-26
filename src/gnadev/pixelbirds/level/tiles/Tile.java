@@ -8,7 +8,7 @@ public abstract class Tile {
 	
 	public static Tile[] tiles = new Tile[256];
 	
-	public static final Tile SKY = new GroundTile(0, 0, 0,Colors.get(445, 445, 445, 445), 0xffffffff);
+	public static final Tile SKY = new GroundTile(0, 1, 0,Colors.get(005,005,005,005), 0xffffffff);
 	public static final Tile WALL = new SolidTile(1, 0, 0, Colors.get(-1,421,531,-1), 0xff000000);
 	public static final Tile FINISH = new GroundTile(2, 2, 0, Colors.get(000,555,-1,-1), 0xff00ff00);
 	public static final Tile GROUND = new SolidTile(3, 3, 0, Colors.get(-1,-1,-1,-1), 0x00);
